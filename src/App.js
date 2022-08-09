@@ -14,8 +14,20 @@ const App = () => {
 
     const getAdvice = () => {
         axios.get('https://api.adviceslip.com/advice')
-            .then(response => setAdvice({advice: response.data.slip.advice, liked: false, disliked: false}))
+            .then(response => checkHistoryAndSetAdvice(response.data.slip.advice))
                 .catch(err => console.log(err))
+    }
+
+    const checkHistoryAndSetAdvice = (advice) => {
+        const myLiked = JSON.parse(localStorage.getItem('likedAdvice')) || [];
+        const myDisliked = JSON.parse(localStorage.getItem('dislikedAdvice')) || [];
+        if (myLiked.includes(advice)) {
+            setAdvice({advice: advice, liked: true, disliked: false});
+        } else if (myDisliked.includes(advice)) {
+            setAdvice({advice: advice, liked: false, disliked: true});
+        } else {
+            setAdvice({advice: advice, liked: false, disliked: false})
+        }
     }
 
     const storeNewData = (name, data) => {
@@ -67,10 +79,6 @@ const App = () => {
 
     return (
         <>
-            <header id="main-header">
-                <button>View Liked</button>
-                <button>View Disliked</button>
-            </header>
             <Advice selectedAdvice={advice} getAdvice={getAdvice}
             handleLikedClick={handleLikedClick} handleDislikedClick={handleDislikedClick} />
         </>
