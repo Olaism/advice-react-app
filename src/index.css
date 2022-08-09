@@ -9,6 +9,7 @@ body {
     background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     background-color: #7a7aaa;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -16,25 +17,42 @@ body {
 #root {
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
     max-width: 500px;
     margin: 0 auto;
     width: 70%;
 }
 
+#main-header {
+    flex: 1 10%;
+    justify-self: center;
+}
+
+#main-header button {
+    padding: 10px 30px;
+    margin: 10px 0 0 5px;
+    border: none;
+}
+
+#main-header button:hover {
+    background-color: #aaa;
+}
+
 .advice {
-    padding: 10%;
+    flex: 1 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.advice main {
     background: #fff;
     text-align: center;
     border-radius: 18px;
+    padding: 10%;
     position: relative;
-}
-
-.advice header button {
-    padding: 0.2rem;
-    border-radius: 50%;
-    margin-right: 5px;
 }
 
 .advice h1 {
@@ -43,6 +61,7 @@ body {
 
 .advice button {
     margin-top: 20px;
+    margin-right: 3px;
     padding: 0.3rem 1rem;
     background-color: #fff;
     color: #7a7aaa;
