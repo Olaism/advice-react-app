@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import Advice from './Advice';
 
 const App = () => {
+    const [loading, setLoading] = useState(true);
     const [advice, setAdvice] = useState('');
     const [, setLikedAdvice] = useState(JSON.parse(localStorage.getItem('likedAdvice')) || []);
     const [, setDislikedAdvice] = useState(JSON.parse(localStorage.getItem('dislikedAdvice')) || []);
 
-    useEffect(() => {
-        getAdvice();
-    }, []);
-
     const getAdvice = () => {
         axios.get('https://api.adviceslip.com/advice')
             .then(response => checkHistoryAndSetAdvice(response.data.slip.advice))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
+        setLoading(false);
     }
 
     const checkHistoryAndSetAdvice = (advice) => {
@@ -26,7 +24,7 @@ const App = () => {
         } else if (myDisliked.includes(advice)) {
             setAdvice({advice: advice, liked: false, disliked: true});
         } else {
-            setAdvice({advice: advice, liked: false, disliked: false})
+            setAdvice({advice: advice, liked: false, disliked: false});
         }
     }
 
@@ -71,6 +69,15 @@ const App = () => {
         setAdvice((prev) => ({...prev, liked: false, disliked: true}))
         checkAndStoreAdvice(advice.advice, false);
         setDislikedAdvice((prev) => [...prev, advice]);
+    }
+
+    if (loading) {
+        return (
+            <div className="loading">
+                <h1 className="loading-header">Welcome!</h1>
+                <button onClick={() => getAdvice()} className="loading-btn">Now go get me an advice!</button>
+            </div>
+        )
     }
 
     if (!advice) {

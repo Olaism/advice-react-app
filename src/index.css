@@ -16,6 +16,21 @@ body {
     align-items: center;
 }
 
+button {
+    margin-top: 20px;
+    margin-right: 3px;
+    padding: 0.3rem 1rem;
+    background-color: #fff;
+    color: #7a7aaa;
+    border: 1px solid;
+    border-radius: 18px;
+    transition: background-color 500ms linear;
+}
+
+button .active {
+    fill: #0000ff;
+}
+
 #root {
     height: 100%;
     display: flex;
@@ -24,6 +39,27 @@ body {
     margin: 0 auto;
     width: 70%;
 }
+
+#root .loading {
+    background: #fff;
+    text-align: center;
+    border-radius: 18px;
+    padding: 10%;
+    flex: 1 100%;
+}
+
+#root .loading-header {
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* #root .loading-btn {
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    background: #123456;
+    color: #ddd;
+} */
 
 #main-header {
     flex: 1 10%;
@@ -59,30 +95,12 @@ body {
     font-size: 2rem;
 }
 
-.advice button {
-    margin-top: 20px;
-    margin-right: 3px;
-    padding: 0.3rem 1rem;
-    background-color: #fff;
-    color: #7a7aaa;
-    border: 1px solid;
-    border-radius: 18px;
-    transition: background-color 500ms linear;
-}
-
-.advice button .active {
-    fill: #0000ff;
-}
-
 .advice button:hover {
     cursor: pointer;
     background-color: #c3ccb9;
 }
 
 @media screen and (min-width: 500px) {
-    /* body {
-        height: 100vh;
-    } */
     .advice .btn-likes {
         position: absolute;
         top: 0;
